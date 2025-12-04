@@ -178,12 +178,9 @@ This repository does not contain a license file. Add a `LICENSE` if you want to 
 
 ---
 
-If you want, I can also:
-
-- Add a short `DEVELOPMENT.md` with common commands and debugging tips,
-- Add example `.env` files (separate for backend/frontend), or
-- Add a small visual polish for the new status UI.
-
----
-
-_Prepared quickly so you can copy/paste the contents above into the repo or GitHub._
+## Next Steps / Improvements
+- Add a short `DEVELOPMENT.md` with common commands and debugging tips.
+- Add example `.env` files (separate for backend/frontend).
+- Add unit/integration tests for critical backend and frontend flows.
+- Set up GitHub Actions CI to run tests on push.
+- Deploy to production using Render/Railway (backend) and Vercel/Netlify (frontend).
