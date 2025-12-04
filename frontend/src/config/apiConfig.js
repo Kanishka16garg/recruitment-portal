@@ -1,7 +1,7 @@
 // Frontend API endpoints configuration
 // Uses `import.meta.env.VITE_API_URL` when available, otherwise falls back
 // to the local backend address used by the project.
-const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:4000/api/v1";
+const API_BASE = import.meta.env.VITE_API_URL || "https://recruitment-portal-a8lm.onrender.com/api/v1";
 
 export const API_ENDPOINTS = {
   USER_REGISTER: `${API_BASE}/user/register`,
