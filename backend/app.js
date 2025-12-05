@@ -14,7 +14,16 @@ import { newsLetterCron } from "./automation/newsLetterCron.js";
 const app = express();
 config({ path: "./config/config.env" });
 
-app.use(cors());
+// ✅ FIXED CORS
+app.use(cors({
+  origin: "https://recruitment-portal-1-rsq5.onrender.com",
+  credentials: true
+}));
+
+app.options("*", cors({
+  origin: "https://recruitment-portal-1-rsq5.onrender.com",
+  credentials: true
+}));
 
 app.use(cookieParser());
 app.use(express.json());
