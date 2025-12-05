@@ -1,6 +1,6 @@
 import express from "express";
 import { config } from "dotenv";
-import cors from "cors";
+const cors = require("cors");
 import cookieParser from "cookie-parser";
 import { connection } from "./database/connection.js";
 import { errorMiddleware } from "./middlewares/error.js";
@@ -14,13 +14,7 @@ import { newsLetterCron } from "./automation/newsLetterCron.js";
 const app = express();
 config({ path: "./config/config.env" });
 
-app.use(
-  cors({
-    origin: [process.env.FRONTEND_URL],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
+app.use(cors());
 
 app.use(cookieParser());
 app.use(express.json());
