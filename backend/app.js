@@ -1,6 +1,6 @@
 import express from "express";
 import { config } from "dotenv";
-const cors = require("cors");
+import cors from "cors";
 import cookieParser from "cookie-parser";
 import { connection } from "./database/connection.js";
 import { errorMiddleware } from "./middlewares/error.js";
