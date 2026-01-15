@@ -1,6 +1,6 @@
-# Recruitment Portal (Job Portal)
+# Niche Nest (Recruitment Portal)
 
-A simple MERN job portal project (backend + frontend) for employers and job seekers.
+A MERN job portal project (backend + frontend) for employers and job seekers.
 
 This repository contains:
 
