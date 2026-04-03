@@ -45,4 +45,3 @@ The Recruitment Portal is a web application designed to streamline the recruitme
 ## Contributing
 If you would like to contribute to this project, please fork the repository and submit a pull request.
 
-## Made with Love By Kanishka Garg
