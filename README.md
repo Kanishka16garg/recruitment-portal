@@ -40,7 +40,7 @@ The Recruitment Portal is a web application designed to streamline the recruitme
 - **Dashboard:** Overview of jobs and applications.
 - **Job Posting Form:** Interface for recruiters to create new job listings.
 
-![Login Page](path/to/login_screenshot.png)
+![Login Page]("C:\Users\Kanishka\OneDrive\사진\Screenshots\Screenshot (266).png")
 ![Dashboard](path/to/dashboard_screenshot.png)
 ![Job Posting Form](path/to/job_posting_form_screenshot.png)
 
