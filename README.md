@@ -8,13 +8,13 @@ The Recruitment Portal is a web application designed to streamline the recruitme
 - Job postings management
 - Application tracking
 - Resume upload functionality
-- Messaging system between candidates and recruiters
+- Email Notification System
 
 ## Tech Stack
 - **Frontend:** React, Bootstrap
 - **Backend:** Node.js, Express
 - **Database:** MongoDB
-- **Deployment:** Heroku
+
 
 ## Setup Instructions
 1. Clone the repository:
