@@ -40,9 +40,10 @@ The Recruitment Portal is a web application designed to streamline the recruitme
 - **Dashboard:** Overview of jobs and applications.
 - **Job Posting Form:** Interface for recruiters to create new job listings.
 
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/61a5ef2c-f949-4529-bfef-b6ad35278769" />
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/a113f8dc-4a82-4669-96e9-664ffe964688" />
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9294e823-98e1-43eb-981b-7a55d12cdd09" />
+<img width="1893" height="898" alt="image" src="https://github.com/user-attachments/assets/6a5adc2b-f5fe-4897-8448-78ae55bb8159" />
+<img width="1885" height="904" alt="image" src="https://github.com/user-attachments/assets/8fb04039-66c4-494b-ac6f-c519ce682d7c" />
+<img width="1895" height="908" alt="image" src="https://github.com/user-attachments/assets/caebe365-aeae-4144-a594-925bf5279a05" />
+
 
 ## Contributing
 If you would like to contribute to this project, please fork the repository and submit a pull request.
