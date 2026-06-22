@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   clearAllJobErrors,
   postJob,
   resetJobSlice,
+  updateJob,
+  fetchSingleJob,
 } from "../store/slices/jobSlice";
 import { CiCircleInfo } from "react-icons/ci";
 
 const JobPost = () => {
+  const [searchParams] = useSearchParams();
+  const editJobId = searchParams.get("editJob");
+  const isEditMode = !!editJobId;
+
   const [title, setTitle] = useState("");
   const [jobType, setJobType] = useState("");
   const [location, setLocation] = useState("");
@@ -71,29 +77,77 @@ const JobPost = () => {
   ];
 
   const { isAuthenticated, user } = useSelector((state) => state.user);
-  const { loading, error, message } = useSelector((state) => state.jobs);
+  const { loading, error, message, singleJob } = useSelector((state) => state.jobs);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // Load job data when in edit mode
+  useEffect(() => {
+    if (isEditMode && editJobId) {
+      dispatch(fetchSingleJob(editJobId));
+    }
+  }, [isEditMode, editJobId, dispatch]);
+
+  // Populate form when job data is loaded
+  useEffect(() => {
+    if (isEditMode && singleJob && singleJob._id === editJobId) {
+      setTitle(singleJob.title || "");
+      setJobType(singleJob.jobType || "");
+      setLocation(singleJob.location || "");
+      setCompanyName(singleJob.companyName || "");
+      setIntroduction(singleJob.introduction || "");
+      setResponsibilities(singleJob.responsibilities || "");
+      setQualifications(singleJob.qualifications || "");
+      setOffers(singleJob.offers || "");
+      setJobNiche(singleJob.jobNiche || "");
+      setSalary(singleJob.salary || "");
+      setHiringMultipleCandidates(singleJob.hiringMultipleCandidates || "");
+      setPersonalWebsiteTitle(singleJob.personalWebsite?.title || "");
+      setPersonalWebsiteUrl(singleJob.personalWebsite?.url || "");
+    }
+  }, [isEditMode, singleJob, editJobId]);
 
   const handlePostJob = (e) => {
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("jobType", jobType);
-    formData.append("location", location);
-    formData.append("companyName", companyName);
-    formData.append("introduction", introduction);
-    formData.append("responsibilities", responsibilities);
-    formData.append("qualifications", qualifications);
-    offers && formData.append("offers", offers);
-    formData.append("jobNiche", jobNiche);
-    formData.append("salary", salary);
-    hiringMultipleCandidates &&
-      formData.append("hiringMultipleCandidates", hiringMultipleCandidates);
-    personalWebsiteTitle &&
-      formData.append("personalWebsiteTitle", personalWebsiteTitle);
-    personalWebsiteUrl &&
-      formData.append("personalWebsiteUrl", personalWebsiteUrl);
+    e.preventDefault();
+    const jobData = {
+      title,
+      jobType,
+      location,
+      companyName,
+      introduction,
+      responsibilities,
+      qualifications,
+      offers,
+      jobNiche,
+      salary,
+      hiringMultipleCandidates,
+      personalWebsiteTitle,
+      personalWebsiteUrl,
+    };
 
-    dispatch(postJob(formData));
+    if (isEditMode) {
+      dispatch(updateJob(editJobId, jobData));
+    } else {
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("jobType", jobType);
+      formData.append("location", location);
+      formData.append("companyName", companyName);
+      formData.append("introduction", introduction);
+      formData.append("responsibilities", responsibilities);
+      formData.append("qualifications", qualifications);
+      offers && formData.append("offers", offers);
+      formData.append("jobNiche", jobNiche);
+      formData.append("salary", salary);
+      hiringMultipleCandidates &&
+        formData.append("hiringMultipleCandidates", hiringMultipleCandidates);
+      personalWebsiteTitle &&
+        formData.append("personalWebsiteTitle", personalWebsiteTitle);
+      personalWebsiteUrl &&
+        formData.append("personalWebsiteUrl", personalWebsiteUrl);
+
+      dispatch(postJob(formData));
+    }
   };
 
   useEffect(() => {
@@ -104,12 +158,17 @@ const JobPost = () => {
     if (message) {
       toast.success(message);
       dispatch(resetJobSlice());
+      if (isEditMode) {
+        setTimeout(() => {
+          navigate("/dashboard?component=My Jobs");
+        }, 1000);
+      }
     }
-  }, [dispatch, error, loading, message]);
+  }, [dispatch, error, loading, message, isEditMode, navigate]);
 
   return (
     <div className="account_components">
-      <h3>Post A Job</h3>
+      <h3>{isEditMode ? "Edit Job" : "Post A Job"}</h3>
       <div>
         <label>Title</label>
         <input
@@ -255,7 +314,7 @@ const JobPost = () => {
           onClick={handlePostJob}
           disabled={loading}
         >
-          Post Job
+          {isEditMode ? "Update Job" : "Post Job"}
         </button>
       </div>
     </div>

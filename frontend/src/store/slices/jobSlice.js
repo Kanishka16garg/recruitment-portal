@@ -56,6 +56,21 @@ const jobSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
+    requestForUpdateJob(state, action) {
+      state.message = null;
+      state.error = null;
+      state.loading = true;
+    },
+    successForUpdateJob(state, action) {
+      state.message = action.payload;
+      state.error = null;
+      state.loading = false;
+    },
+    failureForUpdateJob(state, action) {
+      state.message = null;
+      state.error = action.payload;
+      state.loading = false;
+    },
 
     requestForDeleteJob(state, action) {
       state.loading = true;
@@ -105,7 +120,7 @@ const jobSlice = createSlice({
 });
 
 export const fetchJobs =
-  (city, niche, searchKeyword = "") =>
+  (cities = [], niches = [], searchKeyword = "") =>
   async (dispatch) => {
     try {
       dispatch(jobSlice.actions.requestForAllJobs());
@@ -114,11 +129,15 @@ export const fetchJobs =
       if (searchKeyword) {
         queryParams.push(`searchKeyword=${searchKeyword}`);
       }
-      if (city && city !== "All") {
-        queryParams.push(`city=${city}`);
+      if (cities && cities.length > 0) {
+        cities.forEach((city) => {
+          queryParams.push(`city=${encodeURIComponent(city)}`);
+        });
       }
-      if (niche && niche !== "All") {
-        queryParams.push(`niche=${niche}`);
+      if (niches && niches.length > 0) {
+        niches.forEach((niche) => {
+          queryParams.push(`niche=${encodeURIComponent(niche)}`);
+        });
       }
 
       const link =
@@ -185,6 +204,20 @@ export const deleteJob = (id) => async (dispatch) => {
     dispatch(clearAllJobErrors());
   } catch (error) {
     dispatch(jobSlice.actions.failureForDeleteJob(error.response.data.message));
+  }
+};
+
+export const updateJob = (id, data) => async (dispatch) => {
+  dispatch(jobSlice.actions.requestForUpdateJob());
+  try {
+    const response = await axios.put(`${API_ENDPOINTS.JOB_UPDATE}/${id}`, data, {
+      withCredentials: true,
+      headers: { "Content-Type": "application/json" },
+    });
+    dispatch(jobSlice.actions.successForUpdateJob(response.data.message));
+    dispatch(clearAllJobErrors());
+  } catch (error) {
+    dispatch(jobSlice.actions.failureForUpdateJob(error.response.data.message));
   }
 };
 

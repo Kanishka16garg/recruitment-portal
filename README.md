@@ -1,4 +1,4 @@
-# Recruitment Portal (Job Portal)
+# Recruitment Portal (Job Portal) 🚀
 
 A simple MERN job portal project (backend + frontend) for employers and job seekers.
 
@@ -179,6 +179,7 @@ This repository does not contain a license file. Add a `LICENSE` if you want to 
 ---
 
 ## Next Steps / Improvements
+
 - Add a short `DEVELOPMENT.md` with common commands and debugging tips.
 - Add example `.env` files (separate for backend/frontend).
 - Add unit/integration tests for critical backend and frontend flows.

@@ -86,62 +86,57 @@ const PostApplication = () => {
   return (
     <>
       <article className="application_page">
-        <form>
-          <h3>Application Form</h3>
-          <div>
-            <label>Job Title</label>
-            <input type="text" placeholder={singleJob.title} disabled />
-          </div>
-          <div>
-            <label>Your Name</label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Your Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Phone Number</label>
-            <input
-              type="number"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Address</label>
-            <input
-              type="text"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-            />
-          </div>
-          {user && user.role === "Job Seeker" && (
-            <>
-              <div>
-                <label>Coverletter</label>
-                <textarea
-                  value={coverLetter}
-                  onChange={(e) => setCoverLetter(e.target.value)}
-                  rows={10}
-                />
-              </div>
-              <div>
-                <label>Resume</label>
-                <input type="file" onChange={resumeHandler} />
-              </div>
-            </>
-          )}
-
-          {isAuthenticated && user.role === "Job Seeker" && (
+        {isAuthenticated && user && user.role === "Job Seeker" && (
+          <form>
+            <h3>Application Form</h3>
+            <div>
+              <label>Job Title</label>
+              <input type="text" placeholder={singleJob.title} disabled />
+            </div>
+            <div>
+              <label>Your Name</label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>Your Email</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>Phone Number</label>
+              <input
+                type="number"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>Address</label>
+              <input
+                type="text"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>Coverletter</label>
+              <textarea
+                value={coverLetter}
+                onChange={(e) => setCoverLetter(e.target.value)}
+                rows={10}
+              />
+            </div>
+            <div>
+              <label>Resume</label>
+              <input type="file" onChange={resumeHandler} />
+            </div>
             <div style={{ alignItems: "flex-end" }}>
               <button
                 className="btn"
@@ -151,8 +146,8 @@ const PostApplication = () => {
                 Apply
               </button>
             </div>
-          )}
-        </form>
+          </form>
+        )}
 
         <div className="job-details">
           <header>

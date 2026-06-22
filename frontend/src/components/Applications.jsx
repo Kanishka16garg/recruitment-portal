@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 const Applications = () => {
   const { applications, loading, error, message } = useSelector(
-    (state) => state.applications
+    (state) => state.applications,
   );
 
   const dispatch = useDispatch();
@@ -89,7 +89,10 @@ const Applications = () => {
                         value={element.status}
                         onChange={(e) =>
                           dispatch(
-                            updateApplicationStatus(element._id, e.target.value)
+                            updateApplicationStatus(
+                              element._id,
+                              e.target.value,
+                            ),
                           )
                         }
                       >

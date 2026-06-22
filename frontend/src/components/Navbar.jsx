@@ -2,9 +2,14 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { useTheme } from "../contexts/ThemeContext";
+import { MdDarkMode, MdLightMode } from "react-icons/md";
+
 const Navbar = () => {
   const [show, setShow] = useState(false);
   const { isAuthenticated } = useSelector((state) => state.user);
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <>
       <nav className={show ? "navbar show_navbar" : "navbar"}>
@@ -36,6 +41,19 @@ const Navbar = () => {
                 </Link>
               </li>
             )}
+            <li>
+              <button
+                onClick={toggleTheme}
+                className="theme-toggle"
+                aria-label="Toggle theme"
+              >
+                {theme === "light" ? (
+                  <MdDarkMode size={20} />
+                ) : (
+                  <MdLightMode size={20} />
+                )}
+              </button>
+            </li>
           </ul>
         </div>
         <GiHamburgerMenu className="hamburger" onClick={() => setShow(!show)} />

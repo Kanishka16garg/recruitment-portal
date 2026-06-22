@@ -14,33 +14,37 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { getUser } from "./store/slices/userSlice";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // Try to restore user session on app load
     dispatch(getUser());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/jobs" element={<Jobs />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route
-            path="/post/application/:jobId"
-            element={<PostApplication />}
-          />
+      <ThemeProvider>
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/jobs" element={<Jobs />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route
+              path="/post/application/:jobId"
+              element={<PostApplication />}
+            />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
-        </Routes>
-        <Footer />
-        <ToastContainer position="top-right" theme="dark" />
-      </Router>
+          </Routes>
+          <Footer />
+          <ToastContainer position="top-right" theme="dark" />
+        </Router>
+      </ThemeProvider>
     </>
   );
 };

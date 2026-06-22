@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import {
   clearAllJobErrors,
   deleteJob,
@@ -14,6 +15,8 @@ const MyJobs = () => {
     (state) => state.jobs
   );
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (error) {
       toast.error(error);
@@ -22,12 +25,17 @@ const MyJobs = () => {
     if (message) {
       toast.success(message);
       dispatch(resetJobSlice());
+      dispatch(getMyJobs());
     }
     dispatch(getMyJobs());
   }, [dispatch, error, message]);
 
   const handleDeleteJob = (id) => {
     dispatch(deleteJob(id));
+  };
+
+  const handleEditJob = (jobId) => {
+    navigate(`/dashboard?editJob=${jobId}&component=Job Post`);
   };
 
   return (
@@ -78,12 +86,20 @@ const MyJobs = () => {
                       <span>What Are We Offering:</span> {element.offers}
                     </p>
                   )}
-                  <button
-                    className="btn"
-                    onClick={() => handleDeleteJob(element._id)}
-                  >
-                    Delete Job
-                  </button>
+                  <div className="btn-wrapper">
+                    <button
+                      className="outline_btn"
+                      onClick={() => handleEditJob(element._id)}
+                    >
+                      Edit Job
+                    </button>
+                    <button
+                      className="btn"
+                      onClick={() => handleDeleteJob(element._id)}
+                    >
+                      Delete Job
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>

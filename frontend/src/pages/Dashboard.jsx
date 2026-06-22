@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { logout, clearAllUserErrors } from "../store/slices/userSlice";
 import { LuMoveRight } from "react-icons/lu";
@@ -13,8 +13,14 @@ import Applications from "../components/Applications";
 import MyApplications from "../components/MyApplications";
 
 const Dashboard = () => {
+  const [searchParams] = useSearchParams();
+  const editJobId = searchParams.get("editJob");
+  const componentParam = searchParams.get("component");
+  
   const [show, setShow] = useState(false);
-  const [componentName, setComponentName] = useState("My Profile");
+  const [componentName, setComponentName] = useState(
+    editJobId ? "Job Post" : componentParam || "My Profile"
+  );
 
   const { loading, isAuthenticated, error, user } = useSelector(
     (state) => state.user
@@ -35,7 +41,12 @@ const Dashboard = () => {
     if (!isAuthenticated) {
       navigateTo("/");
     }
-  }, [dispatch, error, loading, isAuthenticated]);
+    if (editJobId) {
+      setComponentName("Job Post");
+    } else if (componentParam) {
+      setComponentName(componentParam);
+    }
+  }, [dispatch, error, loading, isAuthenticated, editJobId, componentParam]);
 
   return (
     <>

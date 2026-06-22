@@ -6,12 +6,16 @@ import { BiSolidLike } from "react-icons/bi";
 const HowItWorks = () => {
   return (
     <section className="howItWorks">
-      <h3>How does it work?</h3>
+      <div className="howItWorks-header">
+        <h3>How does it work?</h3>
+        <p>Get started in three simple steps</p>
+      </div>
       <div className="container">
         <div className="card">
           <div className="icon">
             <LuUserPlus />
           </div>
+          <div className="step-number">1</div>
           <h4>Create an Account</h4>
           <p>
             Sign up for a free account as a job seeker or employer. Set up your
@@ -23,6 +27,7 @@ const HowItWorks = () => {
           <div className="icon">
             <VscTasklist />
           </div>
+          <div className="step-number">2</div>
           <h4>Post or Browse Jobs</h4>
           <p>
             Employers can post detailed job descriptions, and job seekers can
@@ -34,6 +39,7 @@ const HowItWorks = () => {
           <div className="icon">
             <BiSolidLike />
           </div>
+          <div className="step-number">3</div>
           <h4>Hire or Get Hired</h4>
           <p>
             Employers can shortlist candidates and extend job offers. Job

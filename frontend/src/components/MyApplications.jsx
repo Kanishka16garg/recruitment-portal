@@ -13,7 +13,7 @@ import Spinner from "../components/Spinner";
 const MyApplications = () => {
   const { user, isAuthenticated } = useSelector((state) => state.user);
   const { loading, error, applications, message } = useSelector(
-    (state) => state.applications
+    (state) => state.applications,
   );
   const dispatch = useDispatch();
 

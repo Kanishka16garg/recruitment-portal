@@ -11,7 +11,7 @@ import { getUser } from "../store/slices/userSlice";
 const UpdateProfile = () => {
   const { user } = useSelector((state) => state.user);
   const { loading, error, isUpdated } = useSelector(
-    (state) => state.updateProfile
+    (state) => state.updateProfile,
   );
 
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const UpdateProfile = () => {
   const [coverLetter, setCoverLetter] = useState(user && user.coverLetter);
   const [firstNiche, setFirstNiche] = useState(user && user.niches?.firstNiche);
   const [secondNiche, setSecondNiche] = useState(
-    user && user.niches?.secondNiche
+    user && user.niches?.secondNiche,
   );
   const [thirdNiche, setThirdNiche] = useState(user && user.niches?.thirdNiche);
   const [resume, setResume] = useState(null);
